@@ -47,25 +47,25 @@ export default function AddQuestion() {
     }
 
     const checkError = () => {
-        if (!title.length) {
+        if (!title) {
             setErrors({
                 ...errors,
                 title: 'Title is required!'
             })
-            return false;
-        }
-        options.map((item: string, idx: number) => {
-            if (!item.length) {
-                setErrors({
-                    ...errors,
-                    options: 'Please fill out this option!'
-                })
-            }
-        })
-        if (!errors.title || !errors.options) {
-            return false;
-        } else {
             return true;
+        }
+        let oError = '';
+        options.map((item: string) => {
+            if (!item) oError = 'Please fill out this option!';
+        })
+        setErrors({
+            ...errors,
+            options: oError
+        })
+        if (oError) {
+            return true;
+        } else {
+            return false;
         }
     }
 
